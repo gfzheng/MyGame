@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">我的游戏</string>
+    <string name="title_activity_login">登录我的游戏</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_email">邮箱无效</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不正确</string>
+    <string name="error_field_required">这一栏不能为空</string>
+    <string name="action_sign_up">注册</string>
+    <string name="register_ok">注册成功！</string>
+    <string name="register_failed">注册失败～</string>
+</resources>
