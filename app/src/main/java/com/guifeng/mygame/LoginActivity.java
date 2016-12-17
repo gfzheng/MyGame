@@ -18,8 +18,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.guifeng.mygame.model.User;
-import com.guifeng.mygame.model.UserRepository;
+import com.guifeng.mygame.model.Player;
+import com.guifeng.mygame.model.PlayerRepository;
 import com.strongloop.android.loopback.AccessToken;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
@@ -121,15 +121,18 @@ public class LoginActivity extends AppCompatActivity {
             // perform the user login attempt.
             showProgress(true);
             RestAdapter restAdapter = ((MigaApplication)getApplication()).getLoopBackAdapter();
-            UserRepository userRepo = restAdapter.createRepository(UserRepository.class);
+            PlayerRepository userRepo = restAdapter.createRepository(PlayerRepository.class);
 
             System.out.println(email + " : " + password);
             if (bLogin)
-                userRepo.loginUser(email, password, new UserRepository.LoginCallback() {
+                userRepo.loginUser(email, password, new PlayerRepository.LoginCallback() {
                     @Override
-                    public void onSuccess(AccessToken token, User currentUser) {
+                    public void onSuccess(AccessToken token, Player currentUser) {
+
                         System.out.println(token.getUserId() + ":" + currentUser.getId());
                         Log.e("MIGA", "Login OK");
+
+                        ((MigaApplication)getApplication()).setPlayer(currentUser);
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();
@@ -145,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
             else //register
             {
-                User user = userRepo.createUser(email, password);
+                Player user = userRepo.createUser(email, password);
                 user.save(new VoidCallback() {
                     @Override
                     public void onSuccess() {

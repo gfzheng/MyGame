@@ -1,6 +1,8 @@
 package com.guifeng.mygame;
 
 import android.app.Application;
+
+import com.guifeng.mygame.model.Player;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
@@ -8,6 +10,7 @@ import com.strongloop.android.loopback.RestAdapter;
  */
 public class MigaApplication extends Application {
     RestAdapter adapter;
+    private Player player;
 
     public RestAdapter getLoopBackAdapter() {
         if (adapter == null) {
@@ -17,8 +20,18 @@ public class MigaApplication extends Application {
             // However, some applications will need to talk to more than one
             // server - create as many Adapters as you need.
             adapter = new RestAdapter(
-                    getApplicationContext(), "http://10.0.3.2:3000/api");
+                    getApplicationContext(), "http://10.0.3.2:4000/api");
         }
         return adapter;
     }
+
+    public void setPlayer(Player currentPlayer) {
+        player = currentPlayer;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+    
+    
 }
